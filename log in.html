@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" />
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <link href="css/floating-labels.css" rel="stylesheet">
+  </head>
+  <body>
+    
+    <form class="form-signin" action="index.html">
+      <div class="text-center mb-4">
+        <img class="mb-4" src="{{ site.baseurl }}/docs/{{ site.docs_version }}/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        <h1 class="h1 mb-3 font-weight-bold">e-MERCADO</h1>
+        <p>Tu e-commerce favorito</p>
+      </div>
+      <div class="form-label-group">
+        <input type="text" id="inputUsername" class="form-control" placeholder="Username" required autofocus>
+        <label for="inputEmail">Usuario</label> <!--junto con el elemento <label> el atributo for especifica a que elemento de formulario está vinculada una etiqueta-->
+      </div>
+
+      <div class="form-label-group">
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <label for="inputPassword">Contraseña</label>
+      </div>
+
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> Recordar
+        </label>
+      </div>
+      
+      <button class="btn btn-lg btn-primary btn-block" type="submit" id="iniciar_sesion" onclick="set()" >Iniciar sesión</button>
+        
+      
+      <p class="mt-5 mb-3 text-muted text-center">&copy; 2019</p>
+      <script src="js/log in.js"></script>
+    </form>
+  </body>
+</html>
