@@ -24,14 +24,15 @@ function totCostPerArticle() {
 }
 
 function updateSubtotal(){ //Todavia no esta
-    array =[]
-    
-    while(totCostPerArticle() < array.length) {
-        subtotal = subtotal + totCostPerArticle();
-    }
+
+    //while(totCostPerArticle() < array.length) {
+        subtotal = totCostPerArticle(); 
+    //}
     return subtotal;
      
 }
+
+updateSubtotal(unitario, cArticulos)
 
 function updateTotalCosts(){
     total = subtotal + (subtotal * shippingPercentage);
@@ -40,7 +41,7 @@ function updateTotalCosts(){
     //1,00 100%- subtotal
 }
 
-
+//hacer un arreglo de subtotales adentro del for
 
 /*Mostrar tipo de pago no seleccionado*/
 /*
@@ -85,39 +86,38 @@ function showArticles(array){
                     <td>` + totCostPerArticle() + `&nbsp` + article.currency + `</td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col">` + updateSubtotal() + `&nbsp` + article.currency + `</th>
+                </tr>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Costo de envío</th>
+                    <th scope="col"></th>
+                </tr>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Costo total</th>
+                    <th scope="col">` + updateTotalCosts() + `&nbsp` + article.currency + `</th>
+                </tr>
+            </tfoot>
+        </table>
             
         `
+        document.getElementById("tableArticle").innerHTML = htmlContentToAppend;
     }
 
-    htmlContentToAppend += `
-        <tfoot>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Subtotal</th>
-                <th scope="col">` + updateSubtotal() + `&nbsp` + article.currency + `</th>
-            </tr>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Costo de envío</th>
-                <th scope="col"></th>
-            </tr>
-            <tr>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col"></th>
-                <th scope="col">Costo total</th>
-                <th scope="col">` + updateTotalCosts() + `&nbsp` + article.currency + `</th>
-            </tr>
-        </tfoot>
-        
-    </table>
-    `
-    document.getElementById("tableArticle").innerHTML = htmlContentToAppend;
+    
 }
+
 
 
 //Función que se ejecuta una vez que se haya lanzado el evento de
@@ -128,6 +128,11 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === 'ok') {
             product = resultObj.data;
             showArticles(product.articles);
+
+            document.getElementById('productCostText').innerHTML = updateSubtotal();
+            document.getElementById('totalCostText').innerHTML = updateTotalCosts();
         }
     });
+    
 });
+
