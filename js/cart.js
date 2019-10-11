@@ -32,7 +32,7 @@ function updateSubtotal(){ //Todavia no esta
      
 }
 
-updateSubtotal(unitario, cArticulos)
+//function updateSubtotal(unitario, cArticulos)
 
 function updateTotalCosts(){
     total = subtotal + (subtotal * shippingPercentage);
