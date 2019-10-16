@@ -2,8 +2,10 @@
 
 
 var product = {};
-/*
+let canti = 0;
+
 let productUnitCost = 0;
+/*
 let productCurrency = "";*/
 let subtotal = 0;
 let shippingPercentage = 0.15; // Porcentaje de envío 
@@ -19,11 +21,17 @@ let ERROR_MSG = "Ha habido un error :(, verifica qué pasó.";
 //Función que se utiliza para actualizar los costos de publicación
 
 function totCostPerArticle() {
-    totalPerArticle = article.unitCost * article.count;
-    return(totalPerArticle);
+    let totalPerArticle = document.getElementById("total");
+    productUnitCost = article.unitCost;
+    canti = parseInt(document.getElementById("productCountInput").value);
+
+    let totalCostToShow = productUnitCost * canti;
+    
+    totalPerArticle.innerHTML = totalCostToShow;
+    return totalCostToShow;
 }
 
-function updateSubtotal(){ //Todavia no esta
+/*function updateSubtotal(){ //Todavia no esta
 
     //while(totCostPerArticle() < array.length) {
         subtotal = totCostPerArticle(); 
@@ -32,14 +40,14 @@ function updateSubtotal(){ //Todavia no esta
      
 }
 
-//function updateSubtotal(unitario, cArticulos)
+
 
 function updateTotalCosts(){
     total = subtotal + (subtotal * shippingPercentage);
     return total;
     //shippingPercentage0,15 15%- x
     //1,00 100%- subtotal
-}
+}*/
 
 //hacer un arreglo de subtotales adentro del for
 
@@ -52,6 +60,7 @@ function showPaymentTypeNotSelected(){
 function hidePaymentTypeNotSelected(){
 
 }
+<td>` + article.unitCost + `&nbsp` + article.currency + `</td>
 */
 
 function showArticles(array){
@@ -75,7 +84,7 @@ function showArticles(array){
                 <tr>
                     <td>` + article.name + `</td>
                     <td>` + article.unitCost + `&nbsp` + article.currency + `</td>
-                    <td>` + article.count + `</td>
+                    <td><input type="number" name="count" id="productCountInput" value="` + article.count + `" min="1"></td>
                     <td>
                         <div class="col-lg-3 col-md-4 col-6">
                             <div class="d-block mb-4 h-100">
@@ -83,7 +92,7 @@ function showArticles(array){
                             </div>
                         </div>
                     </td>
-                    <td>` + totCostPerArticle() + `&nbsp` + article.currency + `</td>
+                    <td id="total"></td>
                 </tr>
             </tbody>
             <tfoot>
@@ -92,7 +101,7 @@ function showArticles(array){
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col">Subtotal</th>
-                    <th scope="col">` + updateSubtotal() + `&nbsp` + article.currency + `</th>
+                    <th scope="col">&nbsp` + article.currency + `</th>
                 </tr>
                 <tr>
                     <th scope="col"></th>
@@ -106,7 +115,7 @@ function showArticles(array){
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col">Costo total</th>
-                    <th scope="col">` + updateTotalCosts() + `&nbsp` + article.currency + `</th>
+                    <th scope="col">&nbsp` + article.currency + `</th>
                 </tr>
             </tfoot>
         </table>
@@ -114,7 +123,7 @@ function showArticles(array){
         `
         document.getElementById("tableArticle").innerHTML = htmlContentToAppend;
     }
-
+    
     
 }
 
@@ -128,11 +137,20 @@ document.addEventListener("DOMContentLoaded", function(e){
         if (resultObj.status === 'ok') {
             product = resultObj.data;
             showArticles(product.articles);
+            
+            document.getElementById("productCountInput").addEventListener("change", function(){
+                canti = this.value;
+                totCostPerArticle()
+            });
 
-            document.getElementById('productCostText').innerHTML = updateSubtotal();
-            document.getElementById('totalCostText').innerHTML = updateTotalCosts();
+            document.getElementById('total').innerHTML = totCostPerArticle();
+
+            /*document.getElementById('productCostText').innerHTML = updateSubtotal();
+            document.getElementById('totalCostText').innerHTML = updateTotalCosts();*/
         }
     });
     
+    
+
 });
 
