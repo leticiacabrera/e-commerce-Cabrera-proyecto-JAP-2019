@@ -73,18 +73,15 @@ function showArticles(array){
         <table class="table">
             <thead>
                 <tr>
+                    <th scope="col">Imágen ilustrativa</th>
                     <th scope="col">Artículo</th>
                     <th scope="col">Precio unitario</th>
                     <th scope="col">Cantidad</th>
-                    <th scope="col">Imágen ilustrativa</th>
                     <th scope="col">Costo total</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>` + article.name + `</td>
-                    <td>` + article.unitCost + `&nbsp` + article.currency + `</td>
-                    <td><input type="number" name="count" id="productCountInput" value="` + article.count + `" min="1"></td>
                     <td>
                         <div class="col-lg-3 col-md-4 col-6">
                             <div class="d-block mb-4 h-100">
@@ -92,7 +89,10 @@ function showArticles(array){
                             </div>
                         </div>
                     </td>
-                    <td id="total"></td>
+                    <td>` + article.name + `</td>
+                    <td>` + article.currency + `&nbsp` + article.unitCost + `</td>
+                    <td><input type="number" name="count" id="productCountInput" value="` + article.count + `" min="1"></td>
+                    <td class="d-inline-block">` + article.currency + `&nbsp<div id="total" class="d-inline-block"></div></td>
                 </tr>
             </tbody>
             <tfoot>
@@ -101,21 +101,7 @@ function showArticles(array){
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col">Subtotal</th>
-                    <th scope="col">&nbsp` + article.currency + `</th>
-                </tr>
-                <tr>
                     <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Costo de envío</th>
-                    <th scope="col"></th>
-                </tr>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col">Costo total</th>
-                    <th scope="col">&nbsp` + article.currency + `</th>
                 </tr>
             </tfoot>
         </table>
