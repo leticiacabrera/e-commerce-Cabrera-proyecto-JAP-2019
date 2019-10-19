@@ -83,6 +83,11 @@ function showArticles(array){
         </tr>
         `
         document.getElementById("tableArticle").innerHTML = htmlContentToAppend;
+
+        document.getElementById("productCountInput").addEventListener("change", function(){
+            totCostPerArticle()
+        });
+        document.getElementById('total').innerHTML = totCostPerArticle();
     }
     
     
@@ -99,12 +104,9 @@ document.addEventListener("DOMContentLoaded", function(e){
             product = resultObj.data;
             showArticles(product.articles);
             
-            document.getElementById("productCountInput").addEventListener("change", function(){
-                canti = this.value;
-                totCostPerArticle()
-            });
+            
 
-            document.getElementById('total').innerHTML = totCostPerArticle();
+            
 
             /*document.getElementById('productCostText').innerHTML = updateSubtotal();
             document.getElementById('totalCostText').innerHTML = updateTotalCosts();*/
