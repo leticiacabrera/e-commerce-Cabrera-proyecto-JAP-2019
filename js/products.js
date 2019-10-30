@@ -44,20 +44,17 @@ function showProductsList(array){
             ((maxCost == undefined) || (maxCost != undefined && parseInt(category.cost) <= maxCost))){
 
             htmlContentToAppend += `
-            <a href="product-info.html" class="list-group-item list-group-item-action">
-                <div class="row">
-                    <div class="col-3">
-                        <img src="` + category.imgSrc + `" alt="` + category.description + `" class="img-thumbnail">
+            <div class="col-xs-12 col-sm-6 col-md-4">
+                <a href="product-info.html" class="card mb-4 shadow-sm custom-card">
+                    <img src="` + category.imgSrc + `" alt="" class="bd-placeholder-img card-img-top">
+                    <h3 class="m-3">`+ category.name +`</h3>
+                    <div class="card-body">
+                    <small class="text-muted">` + category.soldCount + ` artículos</small>
+                    <p class="card-text">` + category.description + `</p>
+                    <p>`+ category.cost + `&nbsp` + category.currency + `</p>
                     </div>
-                    <div class="col">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h4 class="mb-1">`+ category.name +`</h4>
-                            <small class="text-muted">` + category.soldCount + ` artículos</small>
-                        </div>
-                        <p class="mb-1">` + category.description + `</br>`+ category.cost + `&nbsp` + category.currency + `</p>
-                    </div>
-                </div>
-            </a>
+                </a>
+            </div>
             `
         }
 
@@ -131,11 +128,3 @@ document.addEventListener("DOMContentLoaded", function(e){
         showProductsList();
     });
 });
-
-
-
-
-
-
-
-
