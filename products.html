@@ -51,50 +51,48 @@
 
 
       <main role="main" class="pb-5">
-          <div class="text-center p-4">
-              <h2>Productos</h2>
-              <p class="lead">Verás aquí todos los productos del sitio.</p>
-          </div>
-          <div class="container">
-              <div class="row">
-                  <div class="col text-right">
-                      <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
-                          <div class="col">
-                              <p class="font-weight-normal text-left my-2">Precio</p>
-                          </div>
-                          <label class="btn btn-light" id="sortByCostAscender" >
-                              <input type="radio" name="options" autocomplete="off" checked>Ascendente
-                          </label>
-                          <label class="btn btn-light" id="sortByCostDescender" >
-                              <input type="radio" name="options" autocomplete="off">Descendente
-                          </label>
+        <div class="text-center p-4">
+          <h2>Productos</h2>
+          <p class="lead">Verás aquí todos los productos del sitio.</p>
+        </div>
+        <div class="container">
+          <div class="row">
+              <div class="col text-right">
+                  <div class="btn-group btn-group-toggle mb-4" data-toggle="buttons">
+                      <div class="col">
+                          <p class="font-weight-normal text-left my-2">Precio</p>
                       </div>
+                      <label class="btn btn-light" id="sortByCostAscender" >
+                          <input type="radio" name="options" autocomplete="off" checked>Ascendente
+                      </label>
+                      <label class="btn btn-light" id="sortByCostDescender" >
+                          <input type="radio" name="options" autocomplete="off">Descendente
+                      </label>
                   </div>
               </div>
-                <div class="row justify-content-end">
-                  <div class="col-md-6"></div>
-                    <div class="col-md-6 col-sm-12 mb-1 container">
-                      <div class="row container p-0 m-0">
-                        <div class="col">
-                          <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
-                        </div>
-                        <div class="col">
-                          <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
-                        </div>
-                        <div class="col-3 p-0">
-                          <div class="btn-group" role="group">
-                            <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
-                            <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
-                          </div>
-                        </div>
-                      </div>
+          </div>
+          <div class="row justify-content-end">
+            <div class="col-md-6"></div>
+              <div class="col-md-6 col-sm-12 mb-1 container">
+                <div class="row container p-0 m-0">
+                  <div class="col">
+                    <input class="form-control" type="number" placeholder="min." id="rangeFilterCostMin">
+                  </div>
+                  <div class="col">
+                    <input class="form-control" type="number" placeholder="máx." id="rangeFilterCostMax">
+                  </div>
+                  <div class="col-3 p-0">
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-light btn-block" id="rangeFilterCost">Filtrar</button>
+                      <button class="btn btn-link btn-sm" id="clearRangeFilter">Limpiar</button>
                     </div>
-                </div>
-              <div class="row">
-                  <div class="list-group" id="cat-list-container">
                   </div>
+                </div>
               </div>
           </div>
+          <br>
+          <div class="row" id="cat-list-container"></div>
+        </div>
       </main>
 
     <footer class="text-muted bg-light">
