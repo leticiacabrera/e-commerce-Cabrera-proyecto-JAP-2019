@@ -11,6 +11,52 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/album/">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
 
+    <script>
+      function creditCard() {
+        document.getElementById("creditCardNumber").disabled=false;
+        document.getElementById("creditCardSecurityCode").disabled=false;
+        document.getElementById("dueDate").disabled=false;
+        document.getElementById("bankAccountNumber").disabled=true;
+      }
+
+      function banking() {
+        document.getElementById("creditCardNumber").disabled=true;
+        document.getElementById("creditCardSecurityCode").disabled=true;
+        document.getElementById("dueDate").disabled=true;
+        document.getElementById("bankAccountNumber").disabled=false;
+      }
+
+
+      
+      function Validar() {
+        if(document.form.paymentType[0].checked==false && document.form.paymentType[1].checked==false) {
+          var para = document.createElement("P");               // Create a <p> element
+          para.innerText = "This is a paragraph";               // Insert text
+          document.body.appendChild(para);                      // Append <p> to <body>
+
+          return false;
+        }
+      return true
+      }
+
+      //Restrinción en el input cod. de seg. sean números
+      function Numeros(string){//Solo numeros
+        var out = '';
+        var filtro = '1234567890';//Caracteres validos
+      
+        //Recorrer el texto y verificar si el caracter se encuentra en la lista de validos 
+        for (var i=0; i<string.length; i++)
+          if (filtro.indexOf(string.charAt(i)) != -1) 
+                //Se añaden a la salida los caracteres validos
+          out += string.charAt(i);
+      
+        //Retornar valor filtrado
+        return out;
+      }
+
+
+    </script>
+
     <style>
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -180,12 +226,15 @@
 
           <h4 class="mb-3">Forma de pago</h4>
           <div class="row">
-          <button type="button" class="m-1 btn btn-link" data-toggle="modal" data-target="#wayToPay">Seleccionar forma de pago</button>
+          <button type="button" class="m-1 btn btn-link" id="formOfPay" data-toggle="modal" data-target="#wayToPay">Seleccionar forma de pago</button>
+          <div class="invalid-feedback">
+              Selecciona una forma de pago
+          </div>
           </div>
           <br>
 
           <!--Botón para abrir la ventana de forma de pago-->
-          <button class="btn btn-primary btn-lg" id="button" type="submit">Comprar</button> <!--data-toggle="modal" data-target="#wayToPay">Comprar</button>-->
+          <button class="btn btn-primary btn-lg" id="button" type="submit">Comprar</button>
         </form>
       
 
@@ -223,20 +272,15 @@
               </div>
             </div>
         </div>
-
-
-        
       </div>
     </main>
-    
-
-    
     
     <!--Ventana formas de pago del artículo-->
     <!-- https://getbootstrap.com/docs/4.0/components/modal/ -->
     <div class="modal fade" tabindex="-1" role="dialog" id="wayToPay">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
+          
           <div class="modal-header">
             <h5 class="modal-title">Forma de pago</h5> <!--Título de la ventana-->
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -244,57 +288,61 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <form class="needs-validation" id="pay-info">
+          
             <div class="modal-body"> <!--Cuerpo de la ventana-->
               <div class="container">
+                <form class="needs-validation" id="pay-info" onSubmit="return Validar()" method="post" name="form">
                   <div class="row">
                     <div class="custom-control custom-radio">
-                      <input id="creditCardPaymentRadio" name="paymentType" type="radio" class="custom-control-input">
-                      <label class="custom-control-label" for="creditCardPaymentRadio">Tarjeta de crédito</label>
+                      <input id="creditCardPaymentRadio" name="paymentType" type="radio" class="custom-control-input" onclick="creditCard()">
+                      <label class="custom-control-label" for="creditCardPaymentRadio" >Tarjeta de crédito</label>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-7 mb-3">
                       <label for="shippingStreet">Número de tarjeta</label>
-                      <input type="text" class="form-control" id="creditCardNumber" placeholder="" value="" >
+                      <input type="text" id="creditCardNumber" class="form-control" placeholder="" value="" maxlength="16" onkeyup="this.value=Numeros(this.value)" disabled>
                       <div class="invalid-feedback">
                         Ingresa un número de tarjeta
                       </div>
                     </div>
                     <div class="col-md-4 mb-3">
                       <label for="shippingStreetNumber">Código de seg.</label>
-                      <input type="number" class="form-control" id="creditCardSecurityCode" placeholder="" value="" >
+                      <input type="text" id="creditCardSecurityCode" class="form-control" placeholder="" value="" maxlength="3" onkeyup="this.value=Numeros(this.value)" disabled>
                       <div class="invalid-feedback">
                         Ingresa el código de seguridad
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                      <div class="col-md-6 mb-3">
-                        <label for="dueDate">Vencimiento (MM/AA)</label>
-                        <input type="text" class="form-control" id="dueDate" placeholder="" value="" >
-                        <div class="invalid-feedback">
-                          Ingresa la fecha de vencimiento
-                        </div>
+                    <div class="col-md-7 mb-3">
+                      <label for="dueDate">Vencimiento (MM/AA)</label>
+                      <input type="month" class="form-control" id="dueDate" placeholder="" value="" disabled>
+                      <div class="invalid-feedback">
+                        Ingresa la fecha de vencimiento
                       </div>
+                    </div>
                   </div>
+                  
                   <div class="row">
                     <div class="custom-control custom-radio">
-                      <input id="bankingRadio" name="paymentType" type="radio" class="custom-control-input">
+                      <input id="bankingRadio" name="paymentType" type="radio" class="custom-control-input" onclick="banking()">
                       <label class="custom-control-label" for="bankingRadio">Transferencia bancaria</label>
                     </div>
                   </div>
                   <hr>
                   <div class="row">
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-7 mb-3">
                       <label for="bankAccountNumber">Número de cuenta</label>
-                      <input type="text" class="form-control" id="bankAccountNumber" placeholder="" value="" >
+                      <input type="text" class="form-control" id="bankAccountNumber" placeholder="" value="" onkeyup="this.value=Numeros(this.value)" disabled>
                       <div class="invalid-feedback">
                         Ingresa un número de cuenta
                       </div>
                     </div>
-              </div>
+                  </div>
+                
+              </div>    
             </div>
             <div class="modal-footer"> <!--Botón inferior para cerrar la ventana-->
               <button type="submit" class="btn btn-primary" data-dismiss="modal">Terminar</button>
@@ -305,13 +353,14 @@
       </div>
     </div>
 
-    <footer class="text-muted">
-      <div class="container">
-        <p class="float-right">
-          <a href="#">Volver arriba</a>
-        </p>
-      </div>
-    </footer>
+
+    <!-- Se limitan los caracteres maximos con maxlength -->
+    <!-- event: datos del evento, utilizado para leer codigo de tecla precionada -->
+    <!-- this: identificador el input -->
+    
+
+
+
     <div id="spinner-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
     <script src="js/vendor/jquery-3.4.1.min.js"></script>
     <script src="js/vendor/bootstrap.bundle.min.js"></script>
