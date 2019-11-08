@@ -47,6 +47,7 @@ function updateTotalCosts(){
 
 //hacer un arreglo de subtotales adentro del for
 
+
 /*Mostrar tipo de pago no seleccionado*/
 /*
 function showPaymentTypeNotSelected(){
@@ -129,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
     
     
-    //Se obtiene el formulario de publicación de producto
+    //Se obtiene el formulario de dirección del cliente
     var sellForm = document.getElementById("buy-info");
 
     //Se agrega una escucha en el evento 'submit' que será
@@ -149,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function(e){
         countrySelect.classList.remove('is-invalid');
 
         //Se realizan los controles necesarios,
-        //En este caso se controla que se haya ingresado el nombre y categoría.
+        //En este caso se controla que se haya ingresado la dirección.
         //Consulto por el nombre del producto
         if (streetInput.value === "")
         {
@@ -184,7 +185,6 @@ document.addEventListener("DOMContentLoaded", function(e){
             //la solicitud para crear la publicación.
 
             getJSONData(CART_BUY_URL).then(function(resultObj){
-                let msgToShowHTML = document.getElementById("resultSpan");
                 let msgToShow = "";
     
                 //Si la publicación fue exitosa, devolverá mensaje de éxito,
@@ -205,9 +205,71 @@ document.addEventListener("DOMContentLoaded", function(e){
         //Esto se debe realizar para prevenir que el formulario se envíe (comportamiento por defecto del navegador)
         if (e.preventDefault) e.preventDefault();
             return false;
-    });
+    }); 
+      
+    //Se obtiene el formulario de forma de pago
+    var payForm = document.getElementById("pay-info");
 
+    //Se agrega una escucha en el evento 'submit' que será
+    //lanzado por el formulario cuando se seleccione 'Terminar'.
+    payForm.addEventListener("submit", function(e){
 
+        
+        let cardNumberInput = document.getElementById("creditCardNumber");
+        let cardSecurityInput = document.getElementById("creditCardSecurityCode");
+        let dateInput = document.getElementById("dueDate");
+        let bankInput = document.getElementById("bankAccountNumber");
+        let infoMissing = false;
+
+        //Quito las clases que marcan como inválidos
+        cardNumberInput.classList.remove('is-invalid');
+        cardSecurityInput.classList.remove('is-invalid');
+        dateInput.classList.remove('is-invalid');
+        bankInput.classList.remove('is-invalid');
+
+        //Se realizan los controles necesarios,
+        //En este caso se controla que se haya ingresado la dirección.
+        //Consulto por el nombre del producto
+
+        //Consulto por el costo
+        if (cardNumberInput.value === "")
+        {
+            cardNumberInput.classList.add('is-invalid');
+            infoMissing = true;
+        }
+
+        //Consulto por el costo
+        if (cardSecurityInput.value === "")
+        {
+            cardSecurityInput.classList.add('is-invalid');
+            infoMissing = true;
+        }
+
+        if (dateInput.value === "")
+        {
+            dateInput.classList.add('is-invalid');
+            infoMissing = true;
+        }
+
+        if (bankInput.value === "")
+        {
+            bankInput.classList.add('is-invalid');
+            infoMissing = true;
+        }
+        
+        if(!infoMissing)
+        {
+            //Aquí ingresa si pasó los controles, irá a enviar
+            //la solicitud para crear la publicación.
+            
+        }
+
+        //Esto se debe realizar para prevenir que el formulario se envíe (comportamiento por defecto del navegador)
+        if (e.preventDefault) e.preventDefault();
+            return false;
+
+    
+    }); 
+
+ 
 });
-
-
